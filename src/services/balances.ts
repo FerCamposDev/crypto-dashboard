@@ -1,32 +1,33 @@
 import { Alchemy, Network } from 'alchemy-sdk';
-import { fetchBalance, FetchBalanceResult, Address } from '@wagmi/core';
+import { fetchBalance, Address } from '@wagmi/core';
+import { BalanceResult } from '@/interfaces/balances';
 
-export const getAllBalances = async (address: Address) => {
-	const allBalances: FetchBalanceResult[] = [];
-	const config = {
-		apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY,
-		network: Network.ETH_MAINNET,
-	};
-  
+export const getAllBalances = async (address: Address, network?: Network) => {
 	try {
-		const alchemy = new Alchemy(config);
-		const balances = await alchemy.core.getTokenBalances(address);
+		const alchemy = new Alchemy({
+			apiKey: process.env.NEXT_PUBLIC_ALCHEMY_API_KEY,
+			network: network || Network.ETH_MAINNET,
+		});
 
-		console.log(`The balances of ${address} address are:`, balances);
+		const balances = await alchemy.core.getTokenBalances(address);
+		
+		const allBalances: BalanceResult[] = [];
+
 		for (const token of balances.tokenBalances) {
 			const currentTokenBalance = await fetchBalance({
 				address,
 				token: token.contractAddress as Address,
 			});
 		
-			allBalances.push(currentTokenBalance);
+			allBalances.push({
+				...currentTokenBalance,
+				contractAddress: token.contractAddress
+			});
 		}
 
-		console.log('allBalances :>> ', allBalances);
+		return allBalances;
 	} catch (error) {
 		console.error('error :>> ', error);
-		return [];
+		throw error;
 	}
-
-	return allBalances;
 };
