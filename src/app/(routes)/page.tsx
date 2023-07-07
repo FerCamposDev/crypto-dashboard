@@ -1,8 +1,10 @@
 'use client';
 import useAllCoins from '@/hooks/useAllCoins';
 import useAllBalancesByAddress from '@/hooks/useAllBalances';
-import { getCoinWithBalance } from '../helpers/tokens';
+import { mergeCoinWithBalance } from '../helpers/tokens';
 import useCoinsPrice from '@/hooks/useCoinsPrice';
+import PieChart from '@/components/PieChart';
+import { Spinner } from '@/components/atoms';
 
 const ADDRESS = '0x52b6780bd3D62dAd028475f13da8DA7bc5D73aE6';
 
@@ -10,22 +12,20 @@ export default function Home() {
 	const allBalancesQuery = useAllBalancesByAddress(ADDRESS);
 	const allCoinsQuery = useAllCoins();
 
-	const coinsWithBalance = getCoinWithBalance(allBalancesQuery.data, allCoinsQuery.data);
+	const coinsWithBalance = mergeCoinWithBalance(allBalancesQuery.data, allCoinsQuery.data);
 
 	console.log('coinsWithBalance :>> ', coinsWithBalance);
 
 	const coinsPriceQuery = useCoinsPrice(coinsWithBalance);
 	console.log('coinsPriceQuery :>> ', coinsPriceQuery.data);
 
-	const totalUsd = coinsPriceQuery.data?.reduce((total, curr) => total+= curr.usdBalance, 0);
-
 	return (
 		<main className="flex min-h-screen flex-col items-center justify-center p-24">
-      Loading balances: {JSON.stringify(allBalancesQuery.isFetching)}
+      Loading balances: <Spinner loading={allBalancesQuery.isFetching} />
 			<br />
-      Loading Coins: {JSON.stringify(allCoinsQuery.isFetching)}
+      Loading Coins: <Spinner loading={allCoinsQuery.isFetching} />
 			<br />
-      Loading Coins price: {JSON.stringify(coinsPriceQuery.isFetching)}
+      Loading Coins price: <Spinner loading={coinsPriceQuery.isFetching} />
 			<br />
 			<br />
 			{coinsPriceQuery.data?.map((coin) => {
@@ -41,7 +41,7 @@ export default function Home() {
 			<br />
 			<br />
 
-			<span>Total USD: {totalUsd?.toFixed(2)}</span>
+			<PieChart coinData={coinsPriceQuery.data || []}/>
 		</main>
 	);
 }

@@ -1,6 +1,6 @@
 import { BalanceResult, CoinWithBalance, CoingeckoCoin } from '@/interfaces';
 
-export const getCoinWithBalance = (balances: BalanceResult[] = [], allCoins: CoingeckoCoin[] = []): CoinWithBalance[] => {
+export const mergeCoinWithBalance = (balances: BalanceResult[] = [], allCoins: CoingeckoCoin[] = []): CoinWithBalance[] => {
 	if (!balances.length || !allCoins.length) return [];
   
 	const coinsWithBalance = balances.map((balance) => {
