@@ -21,22 +21,25 @@ export default function Home() {
 
 	return (
 		<main className="flex min-h-screen flex-col items-center justify-center p-24">
-      Loading balances: <Spinner loading={allBalancesQuery.isFetching} />
+			<div className='flex'>
+				Loading balances: <Spinner loading={allBalancesQuery.isFetching} />
+			</div>
 			<br />
+			<div className='flex'>
       Loading Coins: <Spinner loading={allCoinsQuery.isFetching} />
+			</div>
 			<br />
+			<div className='flex'>
       Loading Coins price: <Spinner loading={coinsPriceQuery.isFetching} />
-			<br />
-			<br />
-			{coinsPriceQuery.data?.map((coin) => {
+			</div>
+			{/* {coinsPriceQuery.data?.map((coin) => {
 				const { id, name, usdBalance, formatted, symbol } = coin;
-
 				return (
 					<div key={id}>
 						<span>{formatted} {symbol} ~ USD {usdBalance.toFixed(2)} {name}</span>
 					</div>
 				);
-			})}
+			})} */}
 
 			<br />
 			<br />

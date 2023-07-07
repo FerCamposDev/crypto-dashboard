@@ -9,11 +9,11 @@ type Props = {
 const LegendItem: React.FC<Props> = ({ color, text, iconUrl }) => {
 	return (
 		<li className='w-full flex items-center p-2 gap-2'>
-			<svg height="10" width="10">
-				<circle cx="5" cy="5" r="5" fill={color} />
+			<svg height="20" width="20">
+				<circle cx="10" cy="10" r="10" fill={color} />
 			</svg>
-			<span>{text}</span>
 			<Image alt="icon" src={iconUrl} width={22} height={22} fill={false} />
+			<span>{text}</span>
 		</li>
 	);
 };
