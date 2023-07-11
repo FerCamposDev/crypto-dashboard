@@ -6,7 +6,7 @@ ChartJS.register(ArcElement, Tooltip);
 
 import { CoinWithBalanceAndMarket } from '@/interfaces';
 import { colors } from '@/utils';
-import LegendItem from './LegendItem';
+import LegendItem from '../molecules/LegendItem';
 
 type Props = {
   coinData: CoinWithBalanceAndMarket[]
