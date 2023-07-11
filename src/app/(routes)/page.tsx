@@ -3,23 +3,23 @@ import useAllCoins from '@/hooks/useAllCoins';
 import useAllBalancesByAddress from '@/hooks/useAllBalances';
 import { mergeCoinWithBalance } from '../helpers/tokens';
 import useCoinsPrice from '@/hooks/useCoinsPrice';
-import PieChart from '@/components/PieChart';
 import { Spinner } from '@/components/atoms';
+import { PieChart } from '@/components';
 
 const ADDRESS = '0x52b6780bd3D62dAd028475f13da8DA7bc5D73aE6';
 
-export default function Home() {
-	const allBalancesQuery = useAllBalancesByAddress(ADDRESS);
-	const allCoinsQuery = useAllCoins();
+const Home: React.FC = () => {
+  const allBalancesQuery = useAllBalancesByAddress(ADDRESS);
+  const allCoinsQuery = useAllCoins();
 
-	const coinsWithBalance = mergeCoinWithBalance(allBalancesQuery.data, allCoinsQuery.data);
+  const coinsWithBalance = mergeCoinWithBalance(allBalancesQuery.data, allCoinsQuery.data);
 
-	console.log('coinsWithBalance :>> ', coinsWithBalance);
+  console.log('coinsWithBalance :>> ', coinsWithBalance);
 
-	const coinsPriceQuery = useCoinsPrice(coinsWithBalance);
-	console.log('coinsPriceQuery :>> ', coinsPriceQuery.data);
+  const coinsPriceQuery = useCoinsPrice(coinsWithBalance);
+  console.log('coinsPriceQuery :>> ', coinsPriceQuery.data);
 
-	return (
+  return (
 		<main className="flex min-h-screen flex-col items-center justify-center p-24">
 			<div className='flex'>
 				Loading balances: <Spinner loading={allBalancesQuery.isFetching} />
@@ -44,7 +44,9 @@ export default function Home() {
 			<br />
 			<br />
 
-			<PieChart coinData={coinsPriceQuery.data || []}/>
+			<PieChart coinData={coinsPriceQuery.data ?? []}/>
 		</main>
-	);
-}
+  );
+};
+
+export default Home;

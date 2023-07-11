@@ -1,14 +1,14 @@
 'use client';
-import { useAccount, useConnect } from "wagmi"
-import { Button, Modal } from "../atoms";
-import { useBoolean } from "usehooks-ts";
-import useLaunchError from "@/hooks/useLaunchError";
+import { useAccount, useConnect } from 'wagmi';
+import { Button, Modal } from '../atoms';
+import { useBoolean } from 'usehooks-ts';
+import useLaunchError from '@/hooks/useLaunchError';
 
-const ConnectAccountModal = () => {
+const ConnectAccountModal: React.FC = () => {
   const { connector: activeConnector, isConnected, address } = useAccount();
   const { connect, connectors, error, isLoading, pendingConnector } = useConnect();
-  const { value, setTrue, setFalse,  } = useBoolean(false);
-  
+  const { value, setTrue, setFalse } = useBoolean(false);
+
   useLaunchError(error);
 
   return (
@@ -38,7 +38,7 @@ const ConnectAccountModal = () => {
         ))}
       </Modal>
     </div>
-  )
-}
+  );
+};
 
-export default ConnectAccountModal
+export default ConnectAccountModal;

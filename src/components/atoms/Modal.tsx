@@ -1,11 +1,11 @@
-import { FC, Fragment, PropsWithChildren, ReactNode } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
+import { FC, Fragment, PropsWithChildren, ReactNode } from 'react';
+import { Dialog, Transition } from '@headlessui/react';
 
 type Props = PropsWithChildren & {
-  open: boolean
+  open: boolean;
   onClose: () => void;
   title?: string;
-  footer?: ReactNode
+  footer?: ReactNode;
 }
 
 const Modal: FC<Props> = ({ open, onClose, title, children, footer }) => {
@@ -60,7 +60,7 @@ const Modal: FC<Props> = ({ open, onClose, title, children, footer }) => {
         </div>
       </Dialog>
     </Transition.Root>
-  )
-}
+  );
+};
 
-export default Modal
+export default Modal;

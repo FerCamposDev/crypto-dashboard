@@ -5,40 +5,49 @@
     "node": true
   },
   "extends": [
-    "react-app",
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended",
-    "airbnb-typescript",
-    "airbnb/hooks"
+    "next/core-web-vitals",
+    "standard-with-typescript",
+    "plugin:react/recommended"
   ],
-  "parser": "@typescript-eslint/parser",
   "parserOptions": {
+    "project": "./tsconfig.json",
+    "parser": "@typescript-eslint/parser",
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
   "plugins": [
-    "@typescript-eslint",
     "react"
   ],
   "rules": {
-    "indent": [
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
+    "func-names": "off",
+    "prefer-destructuring": [
       "error",
-      "tab"
+      {
+        "object": true,
+        "array": false
+      }
     ],
-    "linebreak-style": [
-      "error",
-      "unix"
-    ],
-    "quotes": [
-      "error",
-      "single"
-    ],
-    "semi": [
-      "error",
-      "always"
+    "no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "req|res|next|val"
+      }
     ],
     "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "semi": [2, "always"],
+    "@typescript-eslint/semi": "off",
+    "@typescript-eslint/consistent-type-imports": "off",
+    "@typescript-eslint/member-delimiter-style": ["error", {
+      "multiline": { "delimiter": "semi", "requireLast": true },
+      "singleline": { "delimiter": "semi", "requireLast": false },
+      "multilineDetection": "brackets"
+    }],
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "no-tabs": ["error", { "allowIndentationTabs": true }],
+    "@typescript-eslint/no-confusing-void-expression": ["error", {
+      "ignoreArrowShorthand": true
+    }]
   }
 }

@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, FC, HTMLProps } from 'react'
+import { ButtonHTMLAttributes, FC } from 'react';
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean;
@@ -35,9 +35,8 @@ const Button: FC<Props> = props => {
         data-te-ripple-init>
         Primary
       </button> */}
-
     </>
-  )
-}
+  );
+};
 
 export default Button;

@@ -2,7 +2,7 @@ export interface CoingeckoCoin {
   id: string;
   symbol: string;
   name: string;
-  platforms: Record<string, string>
+  platforms: Record<string, string>;
 }
 
 export interface CoinMarket {
